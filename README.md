@@ -55,7 +55,7 @@ Socket programming finds applications in various domains, including web developm
 
 ## Programs
 ### Client
-python
+```python
 import socket
 from datetime import datetime
 s=socket.socket()
@@ -69,16 +69,17 @@ ack=c.recv(1024).decode()
 if ack:
  print(ack)
 c.close()
+```
 
 ### Server
-python
+```python
 import socket
 s=socket.socket()
 s.connect(('localhost',8000))
 print(s.getsockname())
 print(s.recv(1024).decode())
 s.send("acknowledgement recived from the server".encode())
-
+```
 ## Output
 ### Client
 ![alt text](<Screenshot 2024-08-21 154657.png>)
