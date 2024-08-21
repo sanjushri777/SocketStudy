@@ -67,7 +67,7 @@ now = datetime.now()
 c.send(now.strftime("%d/%m/%Y %H:%M:%S").encode())
 ack=c.recv(1024).decode()
 if ack:
- print(ack
+ print(ack)
 c.close()
 ```
 
