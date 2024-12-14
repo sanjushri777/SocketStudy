@@ -99,11 +99,13 @@ s.close()
 
 ```
 ## Output
-### Client
-![alt text](<Screenshot 2024-08-21 154657.png>)
-
 ### Server
-![alt text](<Screenshot 2024-08-21 154707.png>)
+![image](https://github.com/user-attachments/assets/a1a57919-15b7-443c-83e0-40a86dbde5c3)
+
+
+### Client
+![image](https://github.com/user-attachments/assets/83db2851-8f0f-4363-9387-3b230f0c53f5)
+
 
 ## Result:
 Thus the study of Socket Programming Completed Successfully
