@@ -58,25 +58,18 @@ Socket programming finds applications in various domains, including web developm
 ```python
 import socket
 from datetime import datetime
-
-
-s = socket.socket()
-s.bind(('localhost', 8000))
+s=socket.socket()
+s.bind(('localhost',8000))
 s.listen(5)
-print("Server is listening...")
-
-c, addr = s.accept()
+print("server is listening...")
+c,addr=s.accept()
 print("Connected to client:", addr)
-
-
-now = datetime.now()
-current_time = now.strftime("%d/%m/%Y %H:%M:%S")
+now=datetime.now()
+current_time=now.strftime("%d/%m/%Y %H:%M:%S")
 c.send(current_time.encode())
-
-
-ack = c.recv(1024).decode()
-print("Acknowledgment from client:", ack)
-
+ack=c.recv(1024).decode()
+if ack:
+   print("Acknowledgement received from client: ",ack)
 c.close()
 
 ```
@@ -84,17 +77,13 @@ c.close()
 ### Client
 ```python
 import socket
-
-
-s = socket.socket()
-s.connect(('localhost', 8000))
-
-
-server_data = s.recv(1024).decode()
-print("Received from server:", server_data)
-
-s.send("ACK: Received the server's data successfully.".encode())
-
+s=socket.socket()
+s.connect(('localhost',8000))
+server_data=s.recv(1024).decode()
+print("Data received from server:",server_data)
+print("sending acknowledment")
+s.send("Ack:Received server data successfully".encode())
+print("ack sent succcessfully")
 s.close()
 
 ```
