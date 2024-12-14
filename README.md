@@ -58,27 +58,45 @@ Socket programming finds applications in various domains, including web developm
 ```python
 import socket
 from datetime import datetime
-s=socket.socket()
-s.bind(('localhost',8000))
+
+
+s = socket.socket()
+s.bind(('localhost', 8000))
 s.listen(5)
-c,addr=s.accept()
-print("Client Address : ",addr)
+print("Server is listening...")
+
+c, addr = s.accept()
+print("Connected to client:", addr)
+
+
 now = datetime.now()
-c.send(now.strftime("%d/%m/%Y %H:%M:%S").encode())
-ack=c.recv(1024).decode()
-if ack:
- print(ack)
+current_time = now.strftime("%d/%m/%Y %H:%M:%S")
+c.send(current_time.encode())
+
+
+ack = c.recv(1024).decode()
+print("Acknowledgment from client:", ack)
+
 c.close()
+
 ```
 
 ### Client
 ```python
 import socket
-s=socket.socket()
-s.connect(('localhost',8000))
-print(s.getsockname())
-print(s.recv(1024).decode())
-s.send("acknowledgement recived from the server".encode())
+
+
+s = socket.socket()
+s.connect(('localhost', 8000))
+
+
+server_data = s.recv(1024).decode()
+print("Received from server:", server_data)
+
+s.send("ACK: Received the server's data successfully.".encode())
+
+s.close()
+
 ```
 ## Output
 ### Client
