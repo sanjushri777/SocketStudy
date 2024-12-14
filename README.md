@@ -57,34 +57,60 @@ Socket programming finds applications in various domains, including web developm
 ### Server
 ```python
 import socket
-from datetime import datetime
-s=socket.socket()
-s.bind(('localhost',8000))
+
+# Create a socket object
+s = socket.socket()
+
+# Bind the socket to localhost and port 8000
+s.bind(('localhost', 8000))
+
+# Start listening for incoming connections
 s.listen(5)
-print("server is listening...")
-c,addr=s.accept()
+print("Server is listening...")
+
+# Accept a connection from a client
+c, addr = s.accept()
 print("Connected to client:", addr)
-now=datetime.now()
-current_time=now.strftime("%d/%m/%Y %H:%M:%S")
-c.send(current_time.encode())
-ack=c.recv(1024).decode()
-if ack:
-   print("Acknowledgement received from client: ",ack)
+
+# Receive the date and time data from the client
+client_data = c.recv(1024).decode()
+print("Date and time received from client:", client_data)
+
+# Send an acknowledgment to the client
+c.send("Ack: Date and time received successfully".encode())
+
+# Close the connection
 c.close()
+
 
 ```
 
 ### Client
 ```python
 import socket
-s=socket.socket()
-s.connect(('localhost',8000))
-server_data=s.recv(1024).decode()
-print("Data received from server:",server_data)
-print("sending acknowledment")
-s.send("Ack:Received server data successfully".encode())
-print("ack sent succcessfully")
+from datetime import datetime
+
+# Create a socket object
+s = socket.socket()
+
+# Connect to the server at localhost on port 8000
+s.connect(('localhost', 8000))
+
+# Get the current date and time
+now = datetime.now()
+current_time = now.strftime("%d/%m/%Y %H:%M:%S")
+
+# Send the current time to the server
+print("Sending date and time to server:", current_time)
+s.send(current_time.encode())
+
+# Receive acknowledgment from the server
+ack = s.recv(1024).decode()
+print("Acknowledgment from server:", ack)
+
+# Close the connection
 s.close()
+
 
 ```
 ## Output
